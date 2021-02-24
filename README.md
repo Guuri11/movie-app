@@ -1,2 +1,2 @@
 # Movie APP 
-React Native app using The MovieDB API 📱⚛
+React Native app using The MovieDB API (Android) 📱⚛

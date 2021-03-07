@@ -1,14 +1,36 @@
-import React from 'react'
-import { Provider as PaperProvider } from 'react-native-paper'
-import { NavigationContainer } from '@react-navigation/native';
-import Navigation  from "./src/navigation/Navigation"
+import React, { useState, useMemo } from 'react'
+import { Provider as PaperProvider, DarkTheme as DarkThemePaper, DefaultTheme as DefaultThemePaper } from 'react-native-paper'
+import { NavigationContainer, DarkTheme as DarkThemeNavigation, DefaultTheme as DefaultThemeNavigation } from '@react-navigation/native';
+import Navigation from "./src/navigation/Navigation"
+import PreferencesContext from "./src/context/PreferencesContext"
 
 export default function App() {
+
+  DefaultThemePaper.colors.primary = "#1ae1f2"
+  DarkThemePaper.colors.primary = "#1ae1f2"
+  DarkThemeNavigation.colors.accent = "#1ae1f2"
+
+  DarkThemeNavigation.colors.background = "#192734"
+  DarkThemeNavigation.colors.card = "#15212b"
+
+  const [theme, setTheme] = useState("dark")
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light":"dark")
+  }
+
+  const preference = useMemo(
+    () => ({toggleTheme, theme}),
+    [theme]
+  )
+
   return (
-    <PaperProvider>
-      <NavigationContainer>
-        <Navigation />
-      </NavigationContainer>
-    </PaperProvider>
+    <PreferencesContext.Provider value={preference} >
+      <PaperProvider theme={theme === "dark" ? DarkThemePaper : DefaultThemePaper} >
+        <NavigationContainer theme={theme === "dark" ? DarkThemeNavigation : DefaultThemeNavigation} >
+          <Navigation />
+        </NavigationContainer>
+      </PaperProvider>
+    </PreferencesContext.Provider>
   )
 }

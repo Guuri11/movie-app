@@ -9,8 +9,6 @@ import { IconButton } from 'react-native-paper'
 
 const Stack = createStackNavigator()
 
-
-
 export default function StackNavigation(props) {
 
     // este objeto tiene distintas propiedades relacionadas con el routing de la app (por ejemplo la funcion de goBack)

@@ -8,7 +8,6 @@ export default function Home() {
 
     const [new_movies, setNewMovies] = useState(null)
 
-    console.log(new_movies);
     useEffect(() => {
         getNewsMoviesApi().then(response => setNewMovies(response.results))
     }, [])

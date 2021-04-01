@@ -30,7 +30,7 @@ export default function Movie(props) {
                 )
             }
             </ScrollView>
-            <ModalVideo show={showVideo} setShow={setShowVideo} />
+            <ModalVideo show={showVideo} setShow={setShowVideo} idMovie={id} />
         </>
     )
 }

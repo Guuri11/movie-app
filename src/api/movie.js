@@ -5,3 +5,18 @@ export function getNewsMoviesApi(page = 1) {
 
     return fetch(url).then(response => response.json()).then(result => result)
 }
+
+export function getGenreMovieApi(idGenres) {
+    const url = `${API_HOST}/genre/movie/list?api_key=${API_KEY}&language=${LANG}`
+
+    return fetch(url).then(response => response.json()).then(result => {
+        const arrayGenres = []
+        idGenres.forEach((id) => {
+            result.genres.forEach(item => {
+                if (item.id === id) arrayGenres.push(item.name)
+            })
+        });
+        return arrayGenres;
+    })
+
+}

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { View, Image, StyleSheet, ScrollView } from 'react-native'
-import { IconButton } from 'react-native-paper'
+import { IconButton, Title, Text } from 'react-native-paper'
 import { getMovieById } from '../api/movie'
 import ModalVideo from '../components/ModalVideo'
 import { BASE_PATH_IMG } from '../utils/constants'
+import { map } from 'loadsh'
 
 export default function Movie(props) {
 
@@ -20,12 +21,16 @@ export default function Movie(props) {
 
     return (
         <>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
             {
                 movie && (
                     <>
                     <MovieImage poster_path={movie.poster_path} />
                     <MovieTrailer setShowVideo={setShowVideo} />
+                    <MovieTitle movie={movie} />
+                    <MovieRating voteCount={movie.vote_count} voteAverage={movie.vote_average} />
+                    <Text style={styles.overview} >{movie.overview}</Text>
+                    <Text style={[styles.overview, {marginBottom: 30}]} >Fecha de lanzamiento: {movie.release_date}</Text>
                     </>
                 )
             }
@@ -56,6 +61,36 @@ function MovieTrailer(props) {
     )
 }
 
+function MovieTitle(props) {
+    const { movie } = props
+
+    return (
+        <View style={styles.viewInfo} >
+            <Title>{movie.title}</Title>
+            <View style={styles.viweGenres} >
+                {
+                    map(movie.genres, (genre, idx) => {
+                        return (
+                            <Text key={idx} style={styles.genre} >{genre.name}</Text>
+                        )
+                    })
+                }
+            </View>
+        </View>
+    )
+}
+
+function MovieRating(props) {
+    const { voteCount, voteAverage } = props
+    const media = voteAverage / 2
+
+    return (
+        <View style={styles.viewRating} >
+            <Text style={ {fontSize: 16, marginRight: 5} }>Puntuación: {media} / 5 ({voteCount} votos)</Text>
+        </View>
+    )
+}
+
 const styles = StyleSheet.create({
     viewPoster: {
         shadowColor: "#000",
@@ -80,5 +115,27 @@ const styles = StyleSheet.create({
         width: 60,
         height: 60,
         borderRadius: 1000
+    },
+    viewInfo: {
+        marginHorizontal: 30,
+    },
+    viweGenres: {
+        flexDirection: "row"
+    },
+    genre: {
+        marginRight: 10,
+        color: "#8697a5"
+    },
+    viewRating: {
+        marginHorizontal: 30,
+        marginTop: 10,
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    overview: {
+        marginHorizontal: 30,
+        marginTop: 20,
+        textAlign: "justify",
+        color: "#8697a5"
     }
 })

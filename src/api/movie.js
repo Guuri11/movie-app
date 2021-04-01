@@ -26,3 +26,9 @@ export function getAllGenresApi() {
     
     return fetch(url).then(response => response.json()).then(result => result)
 }
+
+export function getGenreMoviesApi(genre) {
+    const url = `${API_HOST}/discover/movie?api_key=${API_KEY}&language=${LANG}&with_genres=${genre}`
+    
+    return fetch(url).then(response => response.json()).then(result => result)
+}

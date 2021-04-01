@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View, Image, Dimensions, Touchable, Text, TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, View, Image, Dimensions, Text, TouchableWithoutFeedback } from 'react-native'
 import { Title } from 'react-native-paper'
 import Carousel from 'react-native-snap-carousel'
 import { getGenreMovieApi } from '../api/movie'

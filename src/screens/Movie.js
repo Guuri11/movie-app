@@ -5,8 +5,6 @@ export default function Movie(props) {
 
     const {} = props
 
-    console.log(props);
-
     return (
         <View>
             <Text>Estamos en movie</Text>

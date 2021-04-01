@@ -32,3 +32,9 @@ export function getGenreMoviesApi(genre) {
     
     return fetch(url).then(response => response.json()).then(result => result)
 }
+
+export function getMovieById(id) {
+    const url = `${API_HOST}/movie/${id}?api_key=${API_KEY}&language=${LANG}`
+    
+    return fetch(url).then(response => response.json()).then(result => result)
+}
